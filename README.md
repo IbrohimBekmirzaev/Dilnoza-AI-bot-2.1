@@ -1,16 +1,21 @@
 # Dilnoza AI — Shaxsiy Telegram AI Bot 🤖✨
 
-Ushbu loyiha sizning shaxsiy va aqlli Telegram yordamchingiz bo'lib, u **Dilnoza AI** modeli yordamida ishlaydi. Bot siz bilan o'zbek, rus, ingliz va boshqa tillarda juda tez va muloyim muloqot qila oladi. Telegram botingiz 24/7 rejimda, mutlaqo bepul yoki juda arzon narxda Railway platformasida ishlaydi.
+Ushbu loyiha sizning shaxsiy va aqlli Telegram yordamchingiz bo'lib, u **Dilnoza AI** modeli yordamida ishlaydi. Bot siz bilan o'zbek tilida tez, muloyim va tabiiy muloqot qila oladi. Telegram botingiz 24/7 rejimda Railway platformasida ishlaydi.
 
 ---
 
 ## 🌟 Asosiy Imkoniyatlar (Features)
 
 *   **Dilnoza AI:** Tez va tabiiy javoblar beruvchi aqlli model.
+*   **Doimiy Xotira va Sozlamalar:** Bot suhbat tarixini, admin huquqlarini va foydalanuvchi sozlamalarini SQLite ichida saqlaydi.
 *   **Suhbat Kontekstini Eslab Qolish (Memory):** Bot oxirgi 12 ta xabarni (6 ta savol-javob turnini) eslab qoladi, bu esa suhbatni tabiiy davom ettirishga imkon beradi.
 *   **Chiroyli Formatlash:** Markdown kodlarini chiroyli HTML formatiga o'tkazadi (Code blocks, Bold, Italic, Headers qo'llab-quvvatlanadi).
 *   **Yozayotganlik Indikatori ("typing..."):** Bot javob o'ylayotgan paytda Telegramda "yozmoqda..." statusini ko'rsatib turadi.
 *   **Xotirani Tozalash:** `/clear` buyrug'i orqali eski suhbatni butunlay tozalab, yangi mavzuni boshlash mumkin.
+*   **Tabiiy Buyruq Tushunish:** Asosiy admin oddiy matn orqali admin tayinlash, huquqni pasaytirish, ro'yxatni ko'rish va boshqa buyruqlarni bera oladi.
+*   **Suhbat Uslubi Boshqaruvi:** `qisqa javob ber`, `batafsil javob ber`, `insondek suhbat qur`, `texnik rejimni yoq` kabi iboralar bilan bot uslubi o'zgaradi.
+*   **Xavfli Buyruqlar Tasdiqlanishi:** Adminni o'chirish yoki to'liq huquq berish kabi amallarda tasdiqlash kodi so'raladi.
+*   **Ovozli Suhbat:** Foydalanuvchi ovozli xabar yuborsa, bot uni matnga aylantiradi, javob tayyorlaydi va yana ovozli xabar yuboradi.
 *   **Railway Tayyorligi:** Railway uchun maxsus kichik HTTP server va avtomatik port sozlamalari yozilgan (Health check muvaffaqiyatli o'tishi uchun).
 
 ---
@@ -33,13 +38,33 @@ Loyiha papkasida `.env` nomli fayl yarating (yoki `.env.example` faylini nusxala
 ```env
 BOT_TOKEN=telegram_bot_tokeningiz
 DILNOZA_AI_API_KEY=sizning_dilnoza_ai_kalitingiz
+DILNOZA_AI_TRANSCRIBE_MODEL=gpt-4o-mini-transcribe
+DILNOZA_AI_TTS_MODEL=gpt-4o-mini-tts
+DILNOZA_AI_VOICE_NAME=alloy
+DILNOZA_AI_CUSTOM_VOICE_ID=
+DILNOZA_AI_VOICE_LANGUAGE=uz
 ```
+`DILNOZA_AI_VOICE_NAME` qatorini almashtirib ovozni o'zgartirasiz. Masalan `alloy`, `nova` yoki `shimmer`.
+Agar o'zingizning maxsus ovozingiz bo'lsa, `DILNOZA_AI_CUSTOM_VOICE_ID` ga shu ovoz ID sini yozasiz. Shunda oddiy ovoz nomi emas, aynan siz yaratgan ovoz ishlatiladi.
+
 *(Dilnoza AI uchun mos kalitni xizmat sozlamalaringizdan olishingiz mumkin)*
 
 ### 4. Ishga Tushirish
 Botni sinov rejimida ishga tushirish:
 ```bash
 npm run dev
+```
+
+### 5. Foydali Matn Buyruqlar
+```text
+/start
+qisqa javob ber
+batafsil javob ber
+insondek suhbat qur
+texnik rejimni yoq
+sozlamalarimni ko'rsat
+xotirani tozala
+ovozli xabar yuborish
 ```
 
 ---
@@ -84,7 +109,8 @@ Railway kodni yuklab bo'lgandan so'ng, loyiha sozlamalariga kirib, API kalitlari
 2. Quyidagi 2 ta o'zgaruvchini qo'shing (Add Variable):
    *   `BOT_TOKEN` ➡️ `telegram_bot_tokeningiz`
    *   `DILNOZA_AI_API_KEY` ➡️ `sizning_haqiqiy_dilnoza_ai_kalitingiz`
-3. O'zgaruvchilar saqlangandan so'ng, Railway loyihani avtomatik ravishda qayta ishga tushiradi va botingiz 24/7 rejimida ishlashni boshlaydi! 🎉
+3. Agar SQLite ichidagi xotira, adminlar va sozlamalar restartdan keyin ham saqlansin desangiz, Railway'da persistent volume ulash tavsiya qilinadi.
+4. O'zgaruvchilar saqlangandan so'ng, Railway loyihani avtomatik ravishda qayta ishga tushiradi va botingiz 24/7 rejimida ishlashni boshlaydi! 🎉
 
 ---
 

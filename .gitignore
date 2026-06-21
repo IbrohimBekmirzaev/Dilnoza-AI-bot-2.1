@@ -16,8 +16,11 @@ yarn-error.log*
 authorized-admins.json
 activated-chats.json
 dilnoza-ai.lock
+dilnoza-ai.sqlite
 dilnoza-runtime.log
 dilnoza-runtime-error.log
+runtime.log
+runtime-error.log
 
 # Operating System files
 .DS_Store
